@@ -1,4 +1,4 @@
-import React from 'react'
+import React from 'react';
 import { Todo } from '../model';
 import TodoCard from './TodoCard';
 
@@ -8,10 +8,11 @@ interface Props{
   }
 
 const TodoList:React.FC<Props> = ({ todos, setTodos }: Props) => {
-  return <div className="todos">
-        <div>Todo List</div>
-        {todos.map(t=> <TodoCard todo={t}/>)}
+  return (
+    <div className="todos">
+        {todos.map(todo=> <TodoCard todo={todo} key={todo.id} todos={todos} setTodos={setTodos}/>)}
     </div>
+    )
 }
 
 export default TodoList
