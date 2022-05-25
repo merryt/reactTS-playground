@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useRef, useEffect} from 'react';
 import { Todo } from '../model';
 import { FaEdit, FaMinusCircle, FaCheckCircle  } from 'react-icons/fa';
 import TodoList from './TodoList';
@@ -33,11 +33,20 @@ const TodoCard:React.FC<Props> = ({ todo, todos, setTodos }: Props) => {
         );
     };
 
+    const inputRef = useRef<HTMLInputElement>(null)
+
+    useEffect(()=>{
+        inputRef.current?.focus()
+    }, [edit])
+
+
+    
+
   return (
     <div>
         {
             edit ? (
-                <input type="text" defaultValue={editTodo} onChange={(e)=> handleUpdatedTodo(todo.id, e.target.value)} />
+                <input type="text" defaultValue={editTodo} onChange={(e)=> handleUpdatedTodo(todo.id, e.target.value)} ref={inputRef} />
                 ) :(
                     todo.isDone ? (
                         <h4><s>{todo.todo}</s></h4> 
